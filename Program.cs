@@ -1,13 +1,17 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using NLog.Web;
 
 namespace TicketingSystem
 {
     class Program
     {
+        private static NLog.Logger logger = NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
         static void Main(string[] args)
         {
+            logger.Info("Program started");
+
             string file = "Tickets.csv";
             string choice;
 
@@ -55,6 +59,8 @@ namespace TicketingSystem
                     sw.Close();
                 }
             } while (choice == "1" || choice == "2");
+
+            logger.Info("Program ended");
         }
     }
 }
